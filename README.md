@@ -34,8 +34,8 @@ générer une clé 56-bit.
 
 #### Configuration de la base de données dans Spring Boot:
 
-```Mise a jour de application properties P3_ApiChaTop\src\main\resources\application.properties :
-
+Mise a jour de application properties P3_ApiChaTop\src\main\resources\application.properties :
+```
 spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
 spring.datasource.username=root
 spring.datasource.password=
