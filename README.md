@@ -46,4 +46,4 @@ jwt.secret=votre_clé_secrète
 Pour lancer le serveur Java, dans un terminal placez vous dans le dossier /Back-End/SpringSecurityConfig et entrez la commande mvn spring-boot:run.
 Documentation Swagger de l'API
 
-Pour acceder à la documentation , rendez-vous sur : http://localhost:3001/swagger-ui/index.html#/
+Pour acceder à la documentation , rendez-vous sur : http://localhost:8080/swagger-ui/index.html
