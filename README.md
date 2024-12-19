@@ -1,5 +1,10 @@
 # ChaTop BackEnd API
 
+SpringBoot : 3.4.0
+Java : 17
+Maven : 4.0.0
+JDK : 21
+
 ## Installations
 
 ### WampServer
