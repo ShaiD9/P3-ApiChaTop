@@ -19,24 +19,24 @@ public class RentalController {
     @Autowired
     private RentalService rentalService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<?>createRental(@RequestBody RentalCreation rental) {
         return ResponseEntity.ok(rentalService.createRental(rental));
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("")
     public ResponseEntity<List <Rental>>getAllRental() {
         return ResponseEntity.ok(rentalService.getAll());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Rental> getRentalById(@PathVariable Long id) {
         Optional<Rental> rental = rentalService.getRentalById(id);
         return rental.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateRental(@PathVariable Long id, @RequestBody RentalCreation rentalCreation) {
         try {
             Rental updatedRental = rentalService.updateRental(id, rentalCreation);

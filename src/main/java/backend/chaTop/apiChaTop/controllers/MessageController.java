@@ -21,7 +21,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<?> createMessage(@RequestBody MessageDTO messageDTO) {
         Message message = messageService.createMessage(messageDTO);
         return ResponseEntity.status(201).body(message);
