@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageDTO {
-    private Long rentalId;
-    private Long userId;
+    private Long rental_id;
+    private Long user_id;
     private String message;
 }

@@ -28,9 +28,9 @@ public class AuthService {
         return encodedPassword;
     }
 
-    public String authenticateUser(LoginRequest loginRequest) throws Exception {
-        if (userService.userExist(loginRequest.getEmail())) {
-            return jwtUtil.generateToken(loginRequest.getEmail());
+    public String authenticateUser(String email) throws Exception {
+        if (userService.userExist(email)) {
+            return jwtUtil.generateToken(email);
         }
         return "Login n'existe pas";
     }

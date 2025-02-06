@@ -23,13 +23,13 @@ public class UserService {
     @Autowired
     private UserMapper mapper;
 
-    public String registerUser(RegisterRequest registerRequest) {
+    public String registerUser(RegisterRequest registerRequest) throws Exception {
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new RuntimeException("Email déjà utilisé");
         }
         userRepository.save(mapper.mapFromRegisterDto(registerRequest));
 
-        return "Utilisateur enregistré avec succès";
+        return "Utilisateur crée avec succes";
     }
 
     public boolean userExist(String email) {

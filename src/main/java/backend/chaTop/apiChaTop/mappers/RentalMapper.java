@@ -28,7 +28,9 @@ public class RentalMapper {
         rental.setName(rentalCreation.getName());
         rental.setSurface(rentalCreation.getSurface());
         rental.setPrice(rentalCreation.getPrice());
-        rental.setPicture(rentalCreation.getPicture());
+        if (rentalCreation.getPicture()!=null) {
+            rental.setPicture(rentalCreation.getPicture());
+        }
         rental.setDescription(rentalCreation.getDescription());
         User owner = new User();
         owner.setId(rentalCreation.getOwner_id());

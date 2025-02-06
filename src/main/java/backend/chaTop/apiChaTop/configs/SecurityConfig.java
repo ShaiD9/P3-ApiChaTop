@@ -17,7 +17,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtRequestFilter jwtAuthenticationFilter) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -28,7 +28,10 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "auth/register",
-                                "auth/login"
+                                "auth/login",
+                                "/images/**",
+                                "/*.png", "/*.jpg", "/*.jpeg", "/*.gif",
+                                "/error"
                         ).permitAll())
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

@@ -26,9 +26,9 @@ public class MessageService {
     private MessageMapper messageMapper;
 
     public Message createMessage(MessageDTO messageDTO) {
-        Rental rental = rentalService.getRentalById(messageDTO.getRentalId())
+        Rental rental = rentalService.getRentalById(messageDTO.getRental_id())
                 .orElseThrow(() -> new IllegalArgumentException("Le bien (rental) avec l'ID fourni n'existe pas"));
-        User user = userService.getUserById(messageDTO.getUserId());
+        User user = userService.getUserById(messageDTO.getUser_id());
         Message message = messageMapper.mapFromMessageDTO(messageDTO, rental, user);
         return messageRepository.save(message);
     }
