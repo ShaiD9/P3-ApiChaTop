@@ -27,29 +27,32 @@ public class AuthController {
     @Autowired
     private final UserService userService;
 
-    // Route pour login
+    //route login
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) throws Exception {
-        String token = authService.authenticateUser(loginRequest.getEmail());
-        return ResponseEntity.ok(new LoginResponse(token));  // Utilisation du constructeur avec token
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            String token = authService.login(loginRequest);
+            return ResponseEntity.ok(new LoginResponse(token));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new LoginResponse(e.getMessage()));
+        }
     }
 
-    // Route pour register
+    //route register
     @PostMapping("/register")
-    public ResponseEntity<ObjectNode> register(@RequestBody RegisterRequest registerRequest) throws Exception {
-        userService.registerUser(registerRequest);
-        ObjectMapper obj = new ObjectMapper();
-        ObjectNode result = obj.createObjectNode();
-        TextNode token = obj.valueToTree(authService.authenticateUser(registerRequest.getEmail()));
-        result.put("token",token);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<LoginResponse> register(@RequestBody RegisterRequest registerRequest) {
+        try {
+            String token = authService.register(registerRequest);
+            return ResponseEntity.ok(new LoginResponse(token));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new LoginResponse(e.getMessage()));
+        }
     }
 
+    //route me
     @GetMapping("/me")
-    public ResponseEntity<?> getAuthenticatedUser() {
+    public ResponseEntity<UserDTO> getAuthenticatedUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.getAuthenticatedUser(email);
-        UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getName());
-        return ResponseEntity.ok(userDTO);
+        return ResponseEntity.ok(authService.getAuthenticatedUser(email));
     }
 }

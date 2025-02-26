@@ -10,12 +10,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-
+/**
+ * Implémentation de {@link UserDetailsService} pour charger les détails d'un utilisateur
+ * à partir de son adresse email.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Charge un utilisateur par son email.
+     *
+     * @param email L'adresse email de l'utilisateur.
+     * @return Un objet {@link UserDetails} contenant les informations de l'utilisateur.
+     * @throws UsernameNotFoundException Si aucun utilisateur n'est trouvé avec cet email.
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
@@ -24,4 +35,3 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }
-
